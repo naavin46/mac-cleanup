@@ -79,6 +79,16 @@ echo 'Cleanup XCode Derived Data and Archives...'
 rm -rfv ~/Library/Developer/Xcode/DerivedData/* &>/dev/null
 rm -rfv ~/Library/Developer/Xcode/Archives/* &>/dev/null
 
+echo "Remove all watchman watches..."
+watchman watch-del-all
+
+echo "Cleanup RN packager cache..."
+rm -rfv $TMPDIR/react-*
+rm -rfv $TMPDIR/react-native-packager-cache-*
+
+echo "Delete metro bundle cache..."
+rm -rf $TMPDIR/metro-bundler-cache-*
+
 if type "xcrun" &>/dev/null; then
   echo 'Cleanup iOS Simulators...'
   osascript -e 'tell application "com.apple.CoreSimulator.CoreSimulatorService" to quit'
